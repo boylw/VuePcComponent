@@ -1,0 +1,112 @@
+/* 公共类 */
+/*base style*/
+html {
+  body {
+    font-size: 14px;
+    color: #333333;
+    min-width: 1280px;
+    background: rgb(255, 255, 255);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "微软雅黑";
+
+    div,
+    span,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    abbr,
+    address,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    samp,
+    small,
+    strong,
+    sub,
+    sup,
+    var,
+    b,
+    i,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    figure,
+    footer,
+    header,
+    menu,
+    nav,
+    section,
+    time,
+    mark,
+    audio,
+    video,
+    details,
+    summary {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    dl,
+    dt,
+    dd {
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    i,
+    em {
+      font-style: normal
+    }
+  }
+}
+
+// 背景/选中/主题色
+$primary01: #1fb5ac;
+$primary02: #409EFF;
+$primary03: #F56C6C;
+$primary04: #909399;
+$primary05: #000000;
+
+// 按钮色 -> 主色按钮跟主题色
+$but-primary: $primary01 !default;
+$btn-warning: #ff2021;
+$btn-primaryC: #fff;
+
+// 字体色 -> 主色对应数字
+$txt-primaryT: #fff;
