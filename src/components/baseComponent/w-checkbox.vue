@@ -53,7 +53,7 @@ export default {
     display: block;
     content: "\2714";
     text-align: center;
-    background: $primary01;
+    @include bg_color($primary01);
     color: white;
     width: 15px;
     height: 15px;
@@ -78,7 +78,7 @@ export default {
     user-select: none;
   }
   .w-checkbox:checked + .label-txt {
-    color: $primary01;
+    @include color($primary01);
   }
 }
 </style>

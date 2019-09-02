@@ -57,13 +57,13 @@ export default {
     display: inline-block;
     text-align: center;
     align-items: center;
-    padding: 8px 15px;
+    padding: 6px 15px;
     box-sizing: border-box;
     border-radius: 4px;
     cursor: pointer;
 }
 .default {
-    background: $but-primary;
+    @include bg_color($primary01);
     color:$btn-primaryC;
     min-width: 60px;
     min-height: 30px;
@@ -72,7 +72,8 @@ export default {
 }
 
 .btn-text {
-  color:$but-primary;
+  @include color($primary01);
+      padding: 0 5px 0 0;
   &.able:hover {
     color: crimson;
   }

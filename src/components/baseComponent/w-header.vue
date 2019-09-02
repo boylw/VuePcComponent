@@ -10,11 +10,13 @@
           @click="changeFrameItem(item.id)"
         >{{item.value}}</li>
       </transition-group>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
+
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -23,7 +25,7 @@ export default {
       frameLise: [
         {
           id: 1,
-          value: "公用组件"
+          value: "公用组件1"
         },
         {
           id: 2,
@@ -32,17 +34,13 @@ export default {
       ]
     };
   },
+  created () {
+  },
   methods: {
-      ...mapActions(['updateFrameId']),
+    ...mapActions(['updateFrameId']),
     changeFrameItem(id) {
       this.selectId = id;
-      console.log('====================================');
-      console.log('我选择了header的id:' + id);
-      console.log('====================================');
       this.updateFrameId(id);
-      console.log('====================================');
-      console.log(this.updateFrameId);
-      console.log('====================================');
     }
   }
 };
@@ -59,7 +57,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background: $primary01;
+  @include bg_color($primary01);
   font-family: "微软雅黑";
   box-sizing: border-box;
   z-index: 999;

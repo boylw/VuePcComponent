@@ -25,6 +25,10 @@
           <w-input v-model="rulesFrom.name"></w-input>
         </w-fromitem>
 
+        <w-fromitem label="选择时间" prop="time">
+          <w-input v-model="rulesFrom.time" id="dateTest"></w-input>
+        </w-fromitem>
+
         <w-fromitem label="密码" prop="psw">
           <w-input v-model="rulesFrom.psw" type="password"></w-input>
         </w-fromitem>
@@ -32,6 +36,8 @@
         <w-fromitem label="头像">
           <w-upload @getFiles="readFiles" multiple="false"></w-upload>
         </w-fromitem>
+
+        <w-fromitem label="数据">{{rulesFrom}}</w-fromitem>
 
         <w-fromitem>
           <w-button @click="sumbit()">登录</w-button>
@@ -51,7 +57,7 @@
       <span class="mr-40"></span>
       <!-- 自定义弹窗 -->
       <w-button type="default" @click="showDialog">点击我有自定义弹窗</w-button>
-      <w-dialog>
+      <w-dialog name="test" :show="show">
         <div class="box">
           <h1>你好测试一下自定义弹窗</h1>
           <w-button type="default" @click="closeDialog">关闭</w-button>
@@ -81,8 +87,7 @@
     <div class="section">
       <w-table :tableData="tableData">
         <w-table-header>
-          <w-table-header-item label="date">
-          </w-table-header-item>
+          <w-table-header-item label="date"></w-table-header-item>
           <w-table-header-item label="name"></w-table-header-item>
           <w-table-header-item label="province"></w-table-header-item>
           <w-table-header-item label="city"></w-table-header-item>
@@ -91,23 +96,67 @@
           <w-table-header-item label="操作"></w-table-header-item>
         </w-table-header>
         <w-table-body>
-          <tr v-for="(item,index) in tableData" :key="index">
-            <td><p>{{ item.date }}</p></td>
-            <td><p>{{ item.name }}</p></td>
-            <td><p>{{ item.province }}</p></td>
-            <td><p>{{ item.city }}</p></td>
-            <td><p>{{ item.address }}</p></td>
-            <td><p>{{ item.zip }}</p></td>
-            <td><w-button @click="doHandel(index)">操作</w-button></td> 
+          <tr v-for="(item,index) in tableData" :key="index+8">
+            <td>
+              <p>{{ item.date }}</p>
+            </td>
+            <td>
+              <p>{{ item.name }}</p>
+            </td>
+            <td>
+              <p>{{ item.province }}</p>
+            </td>
+            <td>
+              <p>{{ item.city }}</p>
+            </td>
+            <td>
+              <p>{{ item.address }}</p>
+            </td>
+            <td>
+              <p>{{ item.zip }}</p>
+            </td>
+            <td>
+              <w-button type="text" @click="doHandel(index)">点击获取编号</w-button>
+            </td>
           </tr>
         </w-table-body>
       </w-table>
     </div>
+
+    <h3>分页</h3>
+    <div class="section">
+      <w-pagination :totalPage="8" url></w-pagination>
+    </div>
+
+    <h3>头部panel</h3>
+    <w-panel>用户列表</w-panel>
+
+    <h3>卡片</h3>
+    <w-base-card
+      :totalNumber="card.totalNumber"
+      :newNumber="card.newNumber"
+      :totalCompany="card.totalCompany"
+      :totalProject="card.totalProject"
+      :customerInto="card.customerInto"
+    >用户列表</w-base-card>
+
+    <h3>tab</h3>
+    <w-list-tab :list="tabList">
+        <div class="content-box" slot="0">
+          <div class="">0</div>
+        </div>
+        <div class="content-box" slot="1">
+          <div class="">1</div>
+        </div>
+      </w-list-tab>  
   </div>
+
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import laydate from "layui-laydate";
+
 export default {
   name: "ui",
   provide() {
@@ -121,7 +170,8 @@ export default {
       rulesFrom: {
         name: "",
         psw: "",
-        file: null
+        file: null,
+        time: ""
       },
       rules: {
         name: [
@@ -131,7 +181,8 @@ export default {
         psw: [
           { required: true, message: "请输入密码" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符" }
-        ]
+        ],
+        time: [{ required: true, message: "请选择开始时间" }]
       },
       timer: 2,
       checked: true,
@@ -170,6 +221,27 @@ export default {
           {
             id: 5,
             label: "北京烤鸭"
+          },
+          {
+            id: 6,
+            label: "黄金糕"
+          },
+          {
+            id: 7,
+            label: "双皮奶",
+            disabled: true
+          },
+          {
+            id: 8,
+            label: "蚵仔煎"
+          },
+          {
+            id: 9,
+            label: "龙须面"
+          },
+          {
+            id: 10,
+            label: "北京烤鸭"
           }
         ]
       },
@@ -179,7 +251,8 @@ export default {
           name: "王小虎",
           province: "上海",
           city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄上海市普陀区金沙江路 1517 弄上海市普陀区金沙江路 1517 弄上海市普陀区金沙江路 1517 弄上海市普陀区金沙江路 1517 弄",
+          address:
+            "上海市普陀区金沙江路 1518 弄上海市普陀区金沙江路 1517 弄上海市普陀区金沙江路 1517 弄上海市普陀区金沙江路 1517 弄上海市普陀区金沙江路 1517 弄",
           zip: 200333
         },
         {
@@ -206,10 +279,38 @@ export default {
           address: "上海市普陀区金沙江路 1516 弄",
           zip: 200333
         }
-      ]
+      ],
+      card: {
+        totalNumber: 7997,
+        newNumber: 11,
+        totalCompany: 12,
+        totalProject: 48,
+        customerInto: 5
+      },
+      tabList: [
+        {
+          id: 0,
+          name: "关系链路"
+        },
+        {
+          id: 1,
+          name: "报价订单"
+        },
+      ],
+      show: false,
+
     };
   },
   components: {},
+  mounted() {
+    laydate.render({
+      elem: "#dateTest",
+      type: "datetime",
+      done: value => {
+        this.rulesFrom.time = value;
+      }
+    });
+  },
   methods: {
     ...mapActions(["updateDialog"]),
     sumbit() {
@@ -243,10 +344,11 @@ export default {
       });
     },
     showDialog() {
-      this.updateDialog(true);
+      alert(10);
+      this.show = true;
     },
     closeDialog() {
-      this.updateDialog(false);
+      this.show = false;
     },
     submitDialog() {
       this.$notice({
@@ -258,11 +360,20 @@ export default {
       // this.checked = e;
     },
     doHandel(i) {
-      alert(i);
+      this.$alert({
+        content: "您点击的序号为:" + i,
+        title: "点击列表行测试弹窗"
+      });
     }
   },
   watch: {
     checked(newValue, oldValue) {
+      console.log("====================================");
+      console.log(newValue);
+      console.log("====================================");
+      return newValue;
+    },
+    show(newValue) {
       console.log("====================================");
       console.log(newValue);
       console.log("====================================");
@@ -275,13 +386,14 @@ export default {
 <style lang="scss" scoped>
 .w-ui {
   padding: 30px;
-  background: #fff;
+  background: #f3f3f4;
   h3 {
     margin: 20px 0;
     color: #000000;
     // text-shadow: 2px 2px 2px aqua;
   }
   .section {
+    background: #fff;
     margin: 30px 0;
     display: flex;
     align-items: center;

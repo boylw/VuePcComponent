@@ -93,10 +93,34 @@ html {
     em {
       font-style: normal
     }
+
+    @media screen and (max-width: 1900px) {
+      .base-card .Cpanel_statistical_box>div.Cpanel_each_box {
+        width: 245px;
+      }
+
+      .base-card .Cpanel_statistical_box>div.Cpanel_each_box.user_detail_info {
+        width: 222px;
+      }
+
+      .base-card .Cpanel_statistical_box>div.Cpanel_each_box.details_min_box {
+        width: 145px;
+      }
+
+      .base-card .Cpanel_statistical_box>.Cpanel_each_box .PMSelect {
+        padding-left: 74px;
+      }
+
+    }
   }
+
+  
+
 }
 
+
 // 背景/选中/主题色
+$primary01: #1fb5ac;
 $primary01: #1fb5ac;
 $primary02: #409EFF;
 $primary03: #F56C6C;
@@ -110,3 +134,83 @@ $btn-primaryC: #fff;
 
 // 字体色 -> 主色对应数字
 $txt-primaryT: #fff;
+
+@mixin bg_color($color) {
+  background-color: $color;
+  [data-theme="theme1"] & {
+    background-color:$primary01;
+  }
+  [data-theme="theme2"] & {
+    background-color:$primary02;
+  }
+  [data-theme="theme3"] & {
+    background-color:$primary03;
+  }
+  [data-theme="theme4"] & {
+    background-color:$primary04;
+  }
+}
+
+@mixin sliderBG($color) {
+  background-color: $color;
+  [data-theme="theme1"] & {
+    background-color:$primary02;
+  }
+  [data-theme="theme2"] & {
+    background-color:$primary03;
+  }
+  [data-theme="theme3"] & {
+    background-color:$primary04;
+  }
+  [data-theme="theme4"] & {
+    background-color:$primary01;
+  }
+}
+
+@mixin color($color) {
+  color: $color;
+  [data-theme="theme1"] & {
+    color:$primary01;
+  }
+  [data-theme="theme2"] & {
+    color:$primary02;
+  }
+  [data-theme="theme3"] & {
+    color:$primary03;
+  }
+  [data-theme="theme4"] & {
+    color:$primary04;
+  }
+}
+
+@mixin outLine($color) {
+  outline-color: $color;
+  [data-theme="theme1"] & {
+    outline-color:$primary01;
+  }
+  [data-theme="theme2"] & {
+    outline-color:$primary02;
+  }
+  [data-theme="theme3"] & {
+    outline-color:$primary03;
+  }
+  [data-theme="theme4"] & {
+    outline-color:$primary04;
+  }
+}
+
+@mixin border_color($color) {
+  border-color: $color;
+  [data-theme="theme1"] & {
+    border-color:$primary01;
+  }
+  [data-theme="theme2"] & {
+    border-color:$primary02;
+  }
+  [data-theme="theme3"] & {
+    border-color:$primary03;
+  }
+  [data-theme="theme4"] & {
+    border-color:$primary04;
+  }
+}

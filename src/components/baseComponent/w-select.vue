@@ -16,7 +16,7 @@
     >
     <i :class="['w-select-icon',up == true ? 'up' : '']" ref="WSelectIcon"></i>
     <transition name="fade">
-      <div v-show="showSelectInfo">
+      <div class="select-option-box" v-show="showSelectInfo">
         <slot></slot>
       </div>
     </transition>
@@ -63,9 +63,6 @@ export default {
       this.id = selectItem.id || null;
       this.selectValue = selectItem.value || "";
       this.$nextTick(() => {
-        console.log("====================================");
-        console.log(this.$refs.selectInput);
-        console.log("====================================");
         this.updateValue(this.$refs.selectInput)
       });
     },
@@ -101,7 +98,7 @@ export default {
     width: 100%;
     cursor: pointer;
     &:focus {
-      border-color: $primary01;
+       @include border_color($primary01);
     }
   }
   .w-select-icon {
@@ -125,6 +122,11 @@ export default {
   .fade-enter-active,
   .fade-leave-active {
     transition: all 0.5s;
+  }
+  .select-option-box{
+    z-index: 11;
+    position: absolute;
+    width: 100%;
   }
 }
 </style>

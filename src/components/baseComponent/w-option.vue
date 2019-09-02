@@ -36,6 +36,11 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   margin: 5px 0;
+  max-height: 200px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .w-option-wrap {
     height: 100%;
     .w-option-ul {

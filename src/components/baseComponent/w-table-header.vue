@@ -12,8 +12,8 @@ export default {};
 
 <style lang="scss" scoped>
 .w-table-header {
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   white-space: nowrap;
   font-size: 14px;
   color: #333333;

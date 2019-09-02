@@ -45,7 +45,7 @@
     }
     input:focus {
     & {
-      outline-color: $primary01;
+      @include outLine($primary01);
     }
   }
 </style>

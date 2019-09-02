@@ -1,16 +1,41 @@
 const state = {
-    showDialog : false
+    showDialog : {}
 }
 
 const mutations = {
-    updateDialog(state, payload) {
-        state.showDialog = payload;
+    pushState(state, {name,payload}) {
+        console.log('====================================');
+        console.log('我新加了一个');
+        console.log('====================================');
+        state.showDialog[name] = payload;
+        console.log(state.showDialog[name]);
+    },
+    updateDialog(state, {name,payload}) {
+        console.log('====================================');
+        console.log(name,payload);
+        console.log('====================================');
+        console.log(state.showDialog[name]);
+        console.log('====================================');
+        console.log('====================================');
+        state.showDialog[name] = payload;
     }
 }
 
 const actions = {
-    updateDialog({commit}, payload) {
-        commit('updateDialog', payload);
+    updateDialog({commit}, dialogInfo) {
+        console.log('====================================');
+        console.log(dialogInfo);
+        console.log('====================================');
+        commit('updateDialog', dialogInfo);
+    }
+}
+
+const getters = {
+    showDialog (item) {
+        console.log('====================================');
+        console.log('改变了');
+        console.log('====================================');
+        return item
     }
 }
 
@@ -18,5 +43,6 @@ const actions = {
 export default {
     state,
     mutations,
-    actions
+    actions,
+    getters
 }

@@ -6,7 +6,7 @@ import walert from './server/alert';
 import wnotice from './server/notice';
 import router from './router/router';
 import Http from './axios';
-import axiosInerceptors from './axios/interceptors';
+// import axiosInerceptors from './axios/interceptors';
 
 Vue.config.productionTip = false;
 Vue.prototype.$alert = walert.alert;

@@ -14,6 +14,11 @@ import WTable from "@/components/baseComponent/w-table.vue";
 import WTableHeader from "@/components/baseComponent/w-table-header.vue";
 import WTableHeaderItem from "@/components/baseComponent/w-table-header-item.vue";
 import WTableBody from "@/components/baseComponent/w-table-body.vue";
+import WPagination from "@/components/baseComponent/w-pagination.vue";
+import WPanel from "@/components/baseComponent/w-panel.vue";
+import WBaseCard from "@/components/baseComponent/w-base-card.vue";
+import WDetailCard from "@/components/baseComponent/w-detail-card.vue";
+import wListTab from "@/components/baseComponent/w-list-tab.vue";
 
 export default {
     install : (Vue) => {
@@ -33,5 +38,10 @@ export default {
         Vue.component('WTableHeader',WTableHeader);
         Vue.component('WTableHeaderItem',WTableHeaderItem);
         Vue.component('WTableBody',WTableBody);
+        Vue.component('WPagination',WPagination);
+        Vue.component('WPanel',WPanel);
+        Vue.component('WBaseCard',WBaseCard);
+        Vue.component('WDetailCard',WDetailCard);
+        Vue.component('wListTab',wListTab);
     }
 } 

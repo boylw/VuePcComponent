@@ -10,9 +10,22 @@ const router = new Router({
     mode: 'history',
     // base: '/pc/',
     routes: [{
-        path: '/',
+        path: '/ui',
         name: 'index',
-        component: () => import('@/components/routerComponent/ui.vue')
+        component: () => import('@/page/ui.vue')
+    },{
+        path: '/userList',
+        name: 'index',
+        component: () => import('@/page/userList.vue'),
+        children: [{
+            path: 'userDetail/:id',
+            name: 'userDetail',
+            component: () => import('@/page/userDetail.vue')
+        }]
+    },{
+        path: '/indexBanner',
+        name: 'index',
+        component: () => import('@/page/indexBanner.vue')
     }]
 });
 

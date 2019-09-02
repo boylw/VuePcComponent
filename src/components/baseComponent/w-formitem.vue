@@ -95,7 +95,7 @@
     .from-item-label {
         margin-right: 20px;
         text-align: right;
-        min-width: 45px;
+        min-width: 70px;
         display: inline-block;
     }
 </style>

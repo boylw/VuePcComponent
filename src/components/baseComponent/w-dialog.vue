@@ -1,11 +1,30 @@
 <template>
-  <div class="overall" v-if="this.$store.state.dialog.showDialog">
+  <div class="overall" v-if="this.show">
     <slot></slot>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
+      required:true
+    }
+  },
+  data() {
+    return {
+      
+    }
+  },
+  created () {
+  },
+  methods: {
+   
+  }
+  
+};
 </script>
 
 <style lang="scss" scoped>

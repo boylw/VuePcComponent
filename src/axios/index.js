@@ -1,13 +1,18 @@
 import Vue from 'vue'
 import axios from 'axios';
-import config from '@/config';
+import config from '../config';
 import VueAxios from 'vue-axios';
 import qs from 'qs';
+import {
+    log
+} from 'util';
 
 Vue.use(VueAxios, axios);
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.withCredentials =true;
 function get(param) {
     let baseURL = param.baseURL || config.current;
     let url = (typeof param == 'string' ? param : param.url) || '';
@@ -47,13 +52,20 @@ async function $get(param) {
     let baseURL = param.baseURL || config.current;
     let url = (typeof param == 'string' ? param : param.url) || '';
     let query = param.data;
-    try {
-        let {
-            data
-        } = await axios.get(baseURL + url, {params:query});
-        return data;
-    } catch (error) {
-        console.log(url+'请求有误');
+    if (param.responseType) {
+        try {
+            let res = await axios.get(baseURL + url,{responseType:param.responseType} ,{params:query});
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        try {
+            let res = await axios.get(baseURL + url, {params:query});
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }
@@ -64,22 +76,62 @@ async function $post(param) {
     if (param.contentType) {
         try {
             axios.defaults.headers.post['Content-Type'] = param.contentType;
-            let {
-                data
-            } = await axios.post(baseURL + url, param.data);
-            return data;
+            let res = await axios.post(baseURL + url, param.data);
+            return res;
         } catch (error) {
-            console.log(url+'请求有误');
+            console.log(error);
         }
     } else {
         try {
             let query = qs.stringify(param.data) || {};
-            let {
-                data
-            } = await axios.post(baseURL + url, query);
-            return data;
+            let res = await axios.post(baseURL + url, query);
+            return res;
         } catch (error) {
-            console.log(url+'请求有误');
+            console.log(error);
+        }
+    }
+}
+
+async function $put(param) {
+    let baseURL = param.baseURL || config.current;
+    let url = (typeof param == 'string' ? param : param.url) || '';
+    if (param.contentType) {
+        try {
+            axios.defaults.headers.post['Content-Type'] = param.contentType;
+            let res = await axios.put(baseURL + url, param.data);
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        try {
+            let query = qs.stringify(param.data) || {};
+            let res = await axios.put(baseURL + url, query);
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+async function $patch(param) {
+    let baseURL = param.baseURL || config.current;
+    let url = (typeof param == 'string' ? param : param.url) || '';
+    if (param.contentType) {
+        try {
+            axios.defaults.headers.post['Content-Type'] = param.contentType;
+            let res = await axios.patch(baseURL + url, param.data);
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        try {
+            let query = qs.stringify(param.data) || {};
+            let res = await axios.patch(baseURL + url, query);
+            return res;
+        } catch (error) {
+            console.log(error);
         }
     }
 }
@@ -91,12 +143,10 @@ async function $postFile(param) {
     param.file && fromData.append('file', param.file);
     try {
         axios.defaults.headers.post['Content-Type'] = param.contentType || 'multipart/form-data';
-        let {
-            data
-        } = await axios.post(baseURL + url,fromData);
-        return data;
+        let res = await axios.post(baseURL + url,fromData);
+        return res;
     } catch (error) {
-        console.log(url+'请求有误');
+        console.dir(error);
     }
 }
 
@@ -106,5 +156,8 @@ export default {
     post,
     $get,
     $post,
-    $postFile
+    $put,
+    $postFile,
+    axios,
+    $patch
 }
